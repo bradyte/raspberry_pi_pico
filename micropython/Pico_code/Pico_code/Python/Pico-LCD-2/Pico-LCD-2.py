@@ -27,7 +27,7 @@ class LCD_2inch(framebuf.FrameBuffer):
         self.dc = Pin(DC,Pin.OUT)
         self.dc(1)
         self.buffer = bytearray(self.height * self.width * 2)
-        super().__init__(self.buffer, self.width, self.height, framebuf.GS8)
+        super().__init__(self.buffer, self.width, self.height, framebuf.RGB565)
         self.init_display()
         
         self.RED   =   0x07E0
@@ -157,7 +157,7 @@ class LCD_2inch(framebuf.FrameBuffer):
 if __name__=='__main__':
     pwm = PWM(Pin(BL))
     pwm.freq(1000)
-    pwm.duty_u16(10000)#max 65535
+    pwm.duty_u16(32768)#max 65535
 
     LCD = LCD_2inch()
     #color BRG
